@@ -13,5 +13,7 @@ public class TestListUDG {
         ListUDG graph = new ListUDG(vertexes, edges);
 
         graph.print();
+        graph.BFS();
+        graph.DFS();
     }
 }

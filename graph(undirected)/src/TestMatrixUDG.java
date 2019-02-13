@@ -13,5 +13,7 @@ public class TestMatrixUDG {
         MatrixUDG graph = new MatrixUDG(vertexes, edges);
 
         graph.print();
+        graph.DFS();
+        graph.BFS();
     }
 }

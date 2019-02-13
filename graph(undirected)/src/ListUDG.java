@@ -113,4 +113,82 @@ public class ListUDG {
             System.out.println();
         }
     }
+
+    /**
+     * depth-first search.
+     *
+     * @param i       the index of beginning node
+     * @param visited if the node has been visited set the flag to true
+     */
+    private void DFS(int i, boolean[] visited) {
+        ENode node;
+
+        visited[i] = true;
+        System.out.print(vertexArray[i].vertex + " ");
+        node = vertexArray[i].firstEdge;
+        while (node != null) {
+            if (!visited[node.adjvex]) {
+                DFS(node.adjvex, visited);
+            }
+            node = node.next;
+        }
+    }
+
+    public void DFS() {
+        boolean[] visited = new boolean[vertexArray.length];
+
+        for (int i = 0; i < vertexArray.length; i++) {
+            visited[i] = false;
+        }
+
+        System.out.print("DFS: ");
+        for (int i = 0; i < vertexArray.length; i++) {
+            if (!visited[i]) {
+                DFS(i, visited);
+            }
+        }
+        System.out.println();
+    }
+
+    /**
+     * breadth-first search.
+     */
+    public void BFS() {
+        int head = 0;
+        int rear = 0;
+        // auxiliary queue
+        int[] queue = new int[vertexArray.length];
+        // whether vertex is visited
+        boolean[] visited = new boolean[vertexArray.length];
+
+        for (int i = 0; i < vertexArray.length; i++) {
+            visited[i] = false;
+        }
+
+        System.out.print("BFS: ");
+        for (int i = 0; i < vertexArray.length; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                System.out.print(vertexArray[i].vertex + " ");
+                // offer()
+                queue[rear++] = i;
+            }
+
+            while (head != rear) {
+                // poll()
+                int j = queue[head++];
+                ENode node = vertexArray[j].firstEdge;
+                while (node != null) {
+                    int k = node.adjvex;
+                    if (!visited[k]) {
+                        visited[k] = true;
+                        System.out.print(vertexArray[k].vertex + " ");
+                        queue[rear++] = k;
+                    }
+                    node = node.next;
+                }
+            }
+        }
+        System.out.println();
+    }
 }
